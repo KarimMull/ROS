@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'study_pkg'
+package_name = 'super_karim_study_pkg'
 
 setup(
     name=package_name,
@@ -15,15 +15,14 @@ setup(
     zip_safe=True,
     maintainer='kmull',
     maintainer_email='kmullayanov@duck.com',
-    description='Study package for ROS 2 Jazzy',
+    description='Super study package with time printer node',
     license='Apache-2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'first_node = study_pkg.scripts.first_node:main',
-            'time_printer = study_pkg.scripts.time_printer:main',
-            'even_number_publisher = study_pkg.scripts.even_number_publisher:main',
-            'overflow_listener = study_pkg.scripts.overflow_listener:main',
+           'time_printer = super_karim_study_pkg.scripts.time_printer:main',
+           'even_number_publisher = super_karim_study_pkg.scripts.even_number_publisher:main',
+           'overflow_listener = super_karim_study_pkg.scripts.overflow_listener:main',
         ],
     },
 )
