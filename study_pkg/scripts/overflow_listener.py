@@ -9,15 +9,24 @@ class OverflowListener(Node):
     def __init__(self):
         super().__init__('overflow_listener')
         
-        # Подписываемся на топик /overflow
+        # Объявляем параметры
+        self.declare_parameter('overflow_topic', '/overflow')
+        self.declare_parameter('enable_logging', True)
+        
+        # Читаем параметры
+        self.overflow_topic = self.get_parameter('overflow_topic').get_parameter_value().string_value
+        self.logging = self.get_parameter('enable_logging').get_parameter_value().bool_value
+        
+        # Подписываемся на топик
         self.subscription = self.create_subscription(
             Int32,
-            '/overflow',
+            self.overflow_topic,
             self.callback,
             10
         )
         
-        self.get_logger().info('Узел overflow_listener запущен! Слушаю топик /overflow')
+        if self.logging:
+            self.get_logger().info(f'Слушатель запущен! Слушаю топик {self.overflow_topic}')
 
     def callback(self, msg):
         self.get_logger().warn(f'!!! ПЕРЕПОЛНЕНИЕ !!! Получено значение: {msg.data}')
